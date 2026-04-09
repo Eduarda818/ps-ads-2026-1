@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controller from ' ../controllers/users.js.'
+import controller from '../controllers/users.js'
 const router = Router()
 
 // onde for POST, vai no contoller e cria

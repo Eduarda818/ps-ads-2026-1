@@ -1,19 +1,21 @@
 import express, { json, urlencoded } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import cors from 'cors'
 
 import indexRouter from './routes/index.js'
 
 const app = express()
 
-import cors from 'cors'
-
+// Proteção para o ALLOWED_ORIGINS: se não houver no .env, ele não quebra o split
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',') 
+  : '*'
 
 app.use(cors({
- origin: process.env.ALLOWED_ORIGINS.split(','),
- // credentials: true   // Habilita o envio de cookies para o front-end
+  origin: allowedOrigins,
+  // credentials: true 
 }))
-
 
 app.use(logger('dev'))
 app.use(json())
@@ -22,9 +24,7 @@ app.use(cookieParser())
 
 app.use('/', indexRouter)
 
-
 /**************** ROTAS *******************/
-
 
 import customersRoute from './routes/customers.js'
 app.use('/customers', customersRoute)
@@ -35,6 +35,8 @@ app.use('/cars', carsRoute)
 import usersRoute from './routes/users.js'
 app.use('/users', usersRoute)
 
-
+// import do saller
+import sellerRouter from './routes/seller.js' 
+app.use('/seller', sellerRouter)
 
 export default app
