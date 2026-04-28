@@ -10,7 +10,10 @@ import jwt from 'jsonwebtoken'
  necessidade de apresentação do token
 */
 const bypassRoutes = [
- { url: '/users/login', method: 'POST' }
+ const bypassRoutes = [
+  { url: '/users/login', method: 'POST' },
+  { url: '/users', method: 'POST' }
+]
 ]
 
 
