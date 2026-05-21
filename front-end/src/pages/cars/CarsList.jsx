@@ -1,3 +1,4 @@
+import fetchAuth from '../../lib/fetchAuth'
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
@@ -82,10 +83,8 @@ export default function CarsList() {
 
   async function loadData() {
     try {
-      // Conectamos ao servidor remoto e esperamos uma resposta
-      const response = await fetch(import.meta.env.VITE_API_BASE + '/cars') 
-      // Extraímos da resposta os dados em formato JSON
-      const data = await response.json()
+     // Conectamos ao servidor remoto e esperamos uma resposta
+     const data = await fetchAuth.get('/cars')
       // Armazenamos os dados na variável de estado
       setCars(data)
     }

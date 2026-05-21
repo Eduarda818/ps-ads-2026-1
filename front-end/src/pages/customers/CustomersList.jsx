@@ -1,4 +1,4 @@
-// http://localhost:5173/customers
+import fetchAuth from '../../lib/fetchAuth'
 
 import React from 'react'
 import Typography from '@mui/material/Typography'
@@ -65,10 +65,11 @@ const [customers, setCustomers] = React.useState([])
 
 async function loadData() {
    try {
+    
+
      // Conectamos ao servidor remoto e esperamos uma resposta
-     const response = await fetch(import.meta.env.VITE_API_BASE + '/customers') 
-     // Extraímos da resposta os dados em formato JSON
-     const data = await response.json()
+     const data = await fetchAuth.get('/customers')
+
      // Armazenamos os dados na variável de estado
      setCustomers(data)
    }

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import logotipo from '../assets/karangos-logo-600px.png'
 import MainMenu from './MainMenu'
+import AuthWidgets from './AuthWidgets'
 
 export default function HeaderBar() {
   return (
@@ -11,11 +12,25 @@ export default function HeaderBar() {
       <AppBar position="static" enableColorOnDark>
         <Toolbar variant="dense">
           <MainMenu />
-          <a href="/">
+          
+
+
+
+         <Box sx={{ flexGrow: 1 }}>
+           <a href="/">
            <img src={logotipo} alt="Logotipo Karangos" title="Karangos &bull; Os velhinhos são nossa paixão" style={{ width: '300px' }} />
-          </a>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+           </a>
+         </Box>
+
+
+         <AuthWidgets />
+
+
+       </Toolbar>
+    
+     </AppBar>
+
+
+   </Box>
+ );
 }
