@@ -8,10 +8,12 @@ const router = Router()
 router.post('/login', controller.login)
 router.post('/logout', controller.logout)
 
+router.get('/me', controller.me)
+
 router.post('/', controller.create)
 router.get('/', controller.retrieveAll)
-router.get('/:id', controller.retrieveOne) // parametro na rota funciona como uma váriavel, começa com :
-// não podemos ter mias que um parâmetro por rota
+router.get('/:id', controller.retrieveOne)         // parametro na rota funciona como uma váriavel, começa com :
+                                                // não podemos ter mias que um parâmetro por rota
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
 
