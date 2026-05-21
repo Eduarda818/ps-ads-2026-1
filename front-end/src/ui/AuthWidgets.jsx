@@ -32,7 +32,7 @@ export default function AuthWidgets() {
    if(await feedbackConfirm('Deseja realmente sair?')) {
      feedbackWait(true)
      try {
-       // await fetchAuth.post('/users/logout')
+       await fetchAuth.post('/users/logout')
 
 
        // Apaga o token armazenado no localStorage

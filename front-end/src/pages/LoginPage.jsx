@@ -70,11 +70,12 @@ export default function LoginPage() {
      const result = await fetchAuth.post('/users/login', loginData)
 
 
-     // Armazena o token retornado no localStorage para posterior utilização
-     window.localStorage.setItem(
-       import.meta.env.VITE_AUTH_TOKEN_NAME,
-       result.token
-     )
+    // Armazena o token retornado no localStorage para posterior utilização
+     
+    //window.localStorage.setItem(
+    // import.meta.env.VITE_AUTH_TOKEN_NAME,
+    // result.token
+    //)
 
 
      // Guarda no contexto as informações sobre o usuário autenticado

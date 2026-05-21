@@ -1,39 +1,40 @@
 import express, { json, urlencoded } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import cors from 'cors'
 
 import indexRouter from './routes/index.js'
-import authMiddleware from './middleware/auth.js'
-import customersRoute from './routes/customers.js'
-import carsRoute from './routes/cars.js'
-import usersRoute from './routes/users.js'
-import sellerRouter from './routes/seller.js'
 
 const app = express()
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',') 
-  : '*'
+import cors from 'cors'
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: process.env.ALLOWED_ORIGINS.split(','),
+  credentials: true   // Habilita o envio de cookies para o front-end
 }))
 
-app.use(logger('dev'))
 app.use(json())
 app.use(urlencoded({ extended: false }))
 app.use(cookieParser())
 
+// (...código existente...)
+
 app.use('/', indexRouter)
 
 /******* MIDDLEWARE DE AUTENTICAÇÃO *******/
+
+import authMiddleware from './middleware/auth.js'
 app.use(authMiddleware)
 
 /**************** ROTAS *******************/
+
+import customersRoute from './routes/customers.js'
 app.use('/customers', customersRoute)
+
+import carsRoute from './routes/cars.js'
 app.use('/cars', carsRoute)
+
+import usersRoute from './routes/users.js'
 app.use('/users', usersRoute)
-app.use('/seller', sellerRouter)
 
 export default app
