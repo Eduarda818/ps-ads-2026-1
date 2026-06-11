@@ -1,12 +1,11 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../generated/prisma/client.ts";
+import { PrismaClient } from "../generated/prisma/index.js";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
 const adapter = new PrismaPg({ connectionString });
 
-// 1. Configuramos o log para emitir eventos do nível 'query'
 const prisma = new PrismaClient({ 
   adapter,
   log: [
@@ -17,7 +16,6 @@ const prisma = new PrismaClient({
   ],
 });
 
-// 2. Criamos o listener que intercepta o evento e exibe no console
 prisma.$on('query', (e) => {
   console.log('---');
   console.log('Query: ' + e.query);
