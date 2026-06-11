@@ -1,8 +1,9 @@
-import fetchAuth from '../../lib/fetchAuth'
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+
+import fetchAuth from '../../lib/fetchAuth'
 
 export default function CarsList() {
 
@@ -83,8 +84,9 @@ export default function CarsList() {
 
   async function loadData() {
     try {
-     // Conectamos ao servidor remoto e esperamos uma resposta
-     const data = await fetchAuth.get('/cars')
+      // Conectamos ao servidor remoto e esperamos uma resposta
+      const data = await fetchAuth.get('/cars')
+      
       // Armazenamos os dados na variável de estado
       setCars(data)
     }

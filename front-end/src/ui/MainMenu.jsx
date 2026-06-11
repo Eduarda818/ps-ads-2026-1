@@ -7,81 +7,67 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AuthContext from '../contexts/AuthContext'
 import { routes, UserLevel } from '../routes/routes'
 
-
 export default function MainMenu() {
- const [anchorEl, setAnchorEl] = React.useState(null);
- const open = Boolean(anchorEl);
- const handleClick = (event) => {
-   setAnchorEl(event.currentTarget);
- };
- const handleClose = () => {
-   setAnchorEl(null);
- };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+  const { authState } = React.useContext(AuthContext)
+  const { authUser } = authState
 
- const { authState } = React.useContext(AuthContext)
- const { authUser } = authState
+  let currentUserLevel = UserLevel.ANY
 
+  if (authUser?.is_admin) currentUserLevel = UserLevel.ADMIN
+  else if (authUser) currentUserLevel = UserLevel.AUTHENTICATED
 
- // Determina o nível do usuário autenticado
- let currentUserLevel = UserLevel.ANY
+  const menuRoutes = routes.filter(
+    r => !(r?.omitFromMainMenu) && r.userLevel <= currentUserLevel
+  )
 
-
- if (authUser?.is_admin) currentUserLevel = UserLevel.ADMIN
- else if (authUser) currentUserLevel = UserLevel.AUTHENTICATED
-
-
- /*
-   Filtra as rotas que se tornarão itens de menu, excluindo:
-   - rotas com omitFromMainMenu === true
-   - rotas com userLevel > currentUserLevel
- */
- const menuRoutes = routes.filter(
-   r => !(r?.omitFromMainMenu) && r.userLevel <= currentUserLevel
- )
-
-
- return (
-   <div>
-     <IconButton
-       edge="start"
-       color="inherit"
-       aria-label="menu"
-       sx={{ mr: 2 }}
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-       onClick={handleClick}
-
-
-     >
-       <MenuIcon />
-     </IconButton>
-     <Menu
-       id="basic-menu"
-       anchorEl={anchorEl}
-       open={open}
-       onClose={handleClose}
-       slotProps={{
-         list: {
-           'aria-labelledby': 'basic-button'
-         }
-       }}
-     >
-       {
-         menuRoutes.map(r => (
-           <MenuItem
-             key={r.route}
-             onClick={handleClose}
-             component={Link}
-             to={r.route}
-             divider={r?.divider}
-           >
-             {r.description}
-           </MenuItem>
-         ))
-       }
-     </Menu>
-   </div>
- );
+  return (
+    <div>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 2 }}
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          list: {
+            'aria-labelledby': 'basic-button'
+          }
+        }}
+      >
+        {
+          menuRoutes.map(r => (
+            <MenuItem
+              key={r.route}
+              onClick={handleClose}
+              component={Link}
+              to={r.route}
+              divider={r?.divider}
+            >
+              {r.description}
+            </MenuItem>
+          ))
+        }
+      </Menu>
+    </div>
+  );
 }

@@ -1,32 +1,29 @@
 /*
- Por padrão, oculta os botões de editar e excluir dos datagrids
+  Por padrão, oculta os botões de editar e excluir dos datagrids
 */
 .MuiDataGrid-row button {
- visibility: hidden;
+  visibility: hidden;
 }
-
 
 /*
- Reexibe os botões do datagrid quando o mouse passar sobre a
- respectiva linha
+  Reexibe os botões do datagrid quando o mouse passar sobre a
+  respectiva linha
 */
 .MuiDataGrid-row:hover button {
- visibility: visible;
+  visibility: visible;
 }
-
 
 .form-fields form {
- margin: 0 auto;
- max-width: 95%;
- display: flex;
- justify-content: space-between;
- flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 95%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-
 .form-fields .MuiFormControl-root {
- min-width: 250px;
- max-width: 500px;
- width: 500px;
- margin-bottom: 36px;
+  min-width: 250px;
+  max-width: 500px;
+  width: 500px;
+  margin-bottom: 36px;
 }
